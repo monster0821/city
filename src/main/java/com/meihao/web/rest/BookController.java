@@ -2,12 +2,12 @@ package com.meihao.web.rest;
 
 import com.meihao.domain.Book;
 import com.meihao.repository.BookRepository;
-import com.meihao.service.BookService;
-import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * Created by monster on 2017/10/12.
@@ -18,24 +18,40 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 public class BookController {
 
+    @Autowired
     private BookRepository bookRepository;
 
-    @ApiOperation("根据id获取图书")
-    @RequestMapping(value = "/getBookById", method = RequestMethod.GET)
-    public Book getBookById(@RequestParam("id") String id) {
-                return bookRepository.findById(id);
-            }
-    @RequestMapping("/add")
-    @Test
-    public void add(){
+    /**
+     * 添加图书
+     */
 
-       Book book1 = new Book();
-       book1.setName("aaa");
-       book1.setAuthor("AAA");
-        bookRepository.add(book1);
-       book1.setPrice(88);
-
-
-
+    @PostMapping(value = "/save")
+    public Book save(@RequestBody Book book) {
+        return bookRepository.save(book);
     }
+
+    /**
+     * 根据id查询图书
+     */
+    @RequestMapping(value = "/findById", method = RequestMethod.GET)
+    public Book findById(@RequestParam String id) {
+        return bookRepository.findById(id);
+    }
+
+    /**
+     * 显示所有图书
+     */
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public List<Book> findAll() {
+        return bookRepository.findAll();
+    }
+
+    /**
+     * 根据id删除图书
+     */
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    public void delete(@RequestParam String id) {
+        bookRepository.delete(id);
+    }
+
 }

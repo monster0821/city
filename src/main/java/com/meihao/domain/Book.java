@@ -8,6 +8,7 @@ import org.springframework.data.annotation.Id;
 /**
  * Created by monster on 2017/10/12.
  */
+
 public class Book {
     @Getter
     @Setter

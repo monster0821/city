@@ -1,0 +1,21 @@
+spring:
+  profiles: default
+  data:
+    mongodb:
+      host: 192.168.10.11
+      port: 31423
+      database: mh
+      username: test
+      password: 123
+  http:
+    multipart:
+      max-file-size: 16MB
+      max-request-size: 16MB
+  application :
+     name: "city"
+
+server:
+  address: "${HTTP_BIND_ADDRESS:0.0.0.0}"
+  port: "${HTTP_BIND_PORT:18080}"
+
+
